@@ -14,13 +14,13 @@ from modules import myutils
 import argparse
 parser = argparse.ArgumentParser(description="Configure the analysis",
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-parser.add_argument("-f","--sample",default="ZTauTau_SMPol_25Sept_MuonFix")
+parser.add_argument("-f","--sample",default="ZTauTau_SMPol_March24_long")#"ZTauTau_SMPol_25Sept_MuonFix")
 parser.add_argument("-o","--outfile",default="effis_")
 parser.add_argument("-d","--decay",default=-777,type=int) # GEN 
-parser.add_argument("-p","--photonCut",default=0.1,type=float)
+parser.add_argument("-p","--photonCut",default=0.5,type=float)
 parser.add_argument("-R","--dRMax",default=0.4,type=float)
 parser.add_argument("-n","--neutronCut",default=1,type=float)
-parser.add_argument("-t","--test",default=True,type=bool)
+parser.add_argument("-t","--test",default=False,type=bool)
 
 
 args = parser.parse_args()
@@ -52,9 +52,9 @@ dir_path=path+"/"+sample
 names = ROOT.std.vector('string')()
 nfiles=len(os.listdir(dir_path))
 
-nfiles=1000
+nfiles=200
 if test==True:
-   nfiles=10
+   nfiles=20
 
 print ("Reading files from %s" %dir_path)
 for i in range(1,nfiles+1):
@@ -235,7 +235,7 @@ for event in reader.get("events"):
           foundGen=True
 
           if genVisTauP4.P()<5: continue 
-          if abs(math.cos(genVisTauP4.Theta())>0.9): continue
+          if abs(math.cos(genVisTauP4.Theta()))>0.9: continue
 
           #print ("Gen",genTauP4.P(),genVisTauP4.P(),genVisTauP4.Theta(),genVisTauP4.Phi(),genTauId,genTauQ,genTauDR,genTauNConsts)
 
@@ -319,7 +319,7 @@ for event in reader.get("events"):
             elif (recoTauId>=11 and recoTauId<15):
               recoDM=11
             elif recoTauId>=3 and recoTauId<10:
-              recoDM=3
+              recoDM=2
 
             if selectDecay!=-777 and selectDecay==recoDM:
                 nTausType+=1

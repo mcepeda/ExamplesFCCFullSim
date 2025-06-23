@@ -16,6 +16,7 @@ import ctypes
 from modules import tauReco 
 from modules import weightsPol
 from modules import optimalVariabRho
+from modules import myutils 
 
 import argparse
 parser = argparse.ArgumentParser(description="Configure the analysis",
@@ -34,11 +35,11 @@ print(config)
 
 selectDecay=args.decay
 
-sample="Bhabha_test"
-POL="BHABHA"
+#sample="Bhabha_test"
+#POL="BHABHA"
 
-#sample="ZTauTau_SMPol_25Sept_MuonFix"
-#POL="Test"
+sample="ZTauTau_SMPol_25Sept_MuonFix"
+POL="Test"
 
 fileOutName=args.outfile+"_"+str(args.decay)+"_"+str(args.photonCut)+"_"+str(args.tauCut)+POL+".root"
 #sample=args.sample
@@ -55,7 +56,7 @@ dir_path=path+"/"+sample
 names = ROOT.std.vector('string')()
 nfiles=len(os.listdir(dir_path))
 
-nfiles=10 
+nfiles=100
 #1000
 badfiles=[-1] #11,15]
 
@@ -66,14 +67,7 @@ for i in range(1,nfiles+1):
 #    filename=dir_path+"/{}".format(i)+"/"+file+".root"
     filename=dir_path+"/"+file+"_{}.root".format(i)
     print (filename)
-
-    my_file = Path(filename)
-    if my_file.is_file():
-        root_file = tauReco.open_root_file(filename)
-        if not root_file or root_file.IsZombie(): 
-            continue 
-        #print (my_file)
-        filenames.append(filename)
+    filenames.append(filename)
 
 print ("Read %d files" %len(filenames))
 reader = root_io.Reader(filenames)
@@ -329,7 +323,7 @@ for event in reader.get("events"):
     ## get RECO level info
     pfos = event.get(pfobjects)
     unsorted_recoTaus= tauReco.findAllTaus(pfos,dRMax, minP,PNeutron)
-    recoTaus= tauReco.sort_by_P(unsorted_recoTaus)
+    recoTaus= myutils.sort_by_P(unsorted_recoTaus)
     nRecoTaus=len(recoTaus)
 
     countMuonsP10=0
@@ -409,7 +403,7 @@ for event in reader.get("events"):
       for g in range(0,nGenTaus):
           #if genTaus[g][1]!=1: continue
           genP4=genTaus[g][0]
-          dR=tauReco.dRAngle(genP4,recoMesonP4)
+          dR=myutils.dRAngle(genP4,recoMesonP4)
           if dR<closestDR:
              closestDR=dR
              genIndex=g 

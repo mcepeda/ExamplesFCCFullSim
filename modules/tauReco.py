@@ -133,11 +133,11 @@ def buildTauFromPion(lead,allPfs,DRCone=1,minP=0,PNeutron=10):
              # now check ID and clean
              if candPDG==11 or candPDG==13: 
                 continue
-             if (candPDG==2112 and candP4.P()>PNeutron): # Pandora FIXME: pion -> neutron misID 
+             elif (candPDG==2112 and candP4.P()>PNeutron): # Pandora FIXME: pion -> neutron misID 
                 countNeutrons+=1
-             if candPDG==211 :   # ignoring the difference between kaons and pions for now 
+             elif candPDG==211 :   # ignoring the difference between kaons and pions for now 
                 countPions+=1
-             if candPDG==22 :  # careful: here counting photons and not pi0s. Account for merged/lost photons.  
+             elif candPDG==22 :  # careful: here counting photons and not pi0s. Account for merged/lost photons.  
                 countPhotons+=1
              else: 
                 continue
