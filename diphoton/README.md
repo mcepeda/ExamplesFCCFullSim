@@ -10,6 +10,6 @@ The source (bigger) edm4hep roottrees are at the CIEMAT cluster, I can move part
 
 A sample tree to start with with only 10000 events is in 
 
-```miniTree.root````
+```miniTree.root```
 
 
