@@ -18,7 +18,7 @@ a) some example histograms with the energy of muons, electrons, photons, genPhot
 
 b) a tree with branches with 
 - number of photons, genphotons, genPi0s, and taus in the event
-- 4 vector components for the photons, genphotons and Pi0s, as vectors
+- 4 vector components for the photons, genPhotons and genPi0s, as vectors
   
 ```
 root [3] outtree->Show(1)
