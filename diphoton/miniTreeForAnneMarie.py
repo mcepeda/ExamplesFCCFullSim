@@ -130,7 +130,7 @@ for event in reader.get("events"):
 
     for mc in mc_particles:
         if (abs(mc.getPDG())==22):
-          if mc.getEnergy()>0.1:
+          if mc.getEnergy()>0.1 and mc.getGeneratorStatus()==1:
             photonP4=ROOT.TLorentzVector()
             photonP4.SetXYZM(mc.getMomentum().x,mc.getMomentum().y,mc.getMomentum().z,mc.getMass())
             hGenPhotonsE.Fill(mc.getEnergy())
