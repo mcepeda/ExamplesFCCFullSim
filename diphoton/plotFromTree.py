@@ -155,7 +155,7 @@ canvas.SaveAs("testMassDR.png")
 dRGenPlot.Draw()
 dRPlot.Draw("sames")
 dRGenPlot.SetLineColor(ROOT.kRed)
-dRPlot.SetXTitle("dR between photons (gen vs reco)")
+dRGenPlot.SetXTitle("dR between photons (gen vs reco)")
 canvas.SetLogy()
 canvas.SaveAs("testDR.png")
 
